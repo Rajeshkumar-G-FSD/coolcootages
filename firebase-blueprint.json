@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin",
+      "description": "Represents admin panel credentials and login privileges",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "password": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["username", "password"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Represents guest room bookings, dates, pricing, and guest contact metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "room": { "type": "object" },
+        "checkIn": { "type": "string" },
+        "checkOut": { "type": "string" },
+        "guestsText": { "type": "string" },
+        "nightsNum": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "createdTime": { "type": "string" },
+        "status": { "type": "string" },
+        "billingName": { "type": "string" },
+        "billingEmail": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "phonePrefix": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "paperlessConfirmation": { "type": "boolean" },
+        "bookingForSelf": { "type": "boolean" },
+        "workTrip": { "type": "boolean" },
+        "extraCot": { "type": "boolean" },
+        "specialRequests": { "type": "string" }
+      },
+      "required": ["id", "checkIn", "checkOut", "firstName", "lastName", "billingEmail", "phoneNumber"]
+    }
+  },
+  "firestore": {
+    "admins/{username}": {
+      "schema": "Admin",
+      "description": "Collection of authorized admin panel logins"
+    },
+    "bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of resort reservations"
+    }
+  }
+}

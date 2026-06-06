@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default-deny gate
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper validation functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Admins Collection: Seed credentials, admin checks, password queries
+    match /admins/{username} {
+      // Allow reading individual admin record at login time
+      allow get: if true;
+      // Allow seed write/updates for testing or setup purposes
+      allow write: if true;
+    }
+
+    // Bookings Collection: Public checks to submit, Admin holds full dashboard controls
+    match /bookings/{bookingId} {
+      // Allow creation of bookings by guest checkout
+      allow create: if true;
+      // Allow reading and listing bookings for admin checks, or reading specific booking ID
+      allow read, get, list: if true;
+      // Allow updating or deleting bookings (for admins or cancellations)
+      allow update, delete: if true;
+    }
+
+    // Connectivity test collection
+    match /system_test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

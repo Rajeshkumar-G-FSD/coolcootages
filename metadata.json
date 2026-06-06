@@ -1,0 +1,6 @@
+{
+  "name": "Cool Cottages",
+  "description": "An elegant luxury cottage portal with interactive dynamic villa exploration, stay reservations, hand-crafted elite experiences, and an intelligent Gemini AI concierge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
